@@ -14,8 +14,8 @@ before_install:
   - docker ps -a
 
 before_script:
-  - composer self
-  - composer install
+  - php composer.phar self
+  - php composer.phar install
 
 script:
   - ./vendor/bin/phpunit
