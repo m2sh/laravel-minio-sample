@@ -15,7 +15,7 @@ before_install:
 
 before_script:
   - composer self
-  - composer install --no-interactive
+  - composer install
 
 script:
   - ./vendor/bin/phpunit
