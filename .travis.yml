@@ -9,13 +9,16 @@ services:
   - docker
 
 before_install:
-  - docker pull minio/minio
-  - docker run -d -p 127.0.0.1:9000:9000 -e MINIO_ACCESS_KEY=${MINIO_KEY} -e MINIO_SECRET_KEY=${MINIO_SECRET} minio/minio minio server /export
+  - docker pull minio/minioi
+  - mkdir -p /tmp/export/sample
+  - docker run -d -p 127.0.0.1:9000:9000 -e MINIO_ACCESS_KEY=${MINIO_KEY} -e MINIO_SECRET_KEY=${MINIO_SECRET} -v /tmp/export:/export minio/minio minio server /export
   - docker ps -a
 
 before_script:
   - php composer.phar self
   - php composer.phar install
+  - cp .env.example .env 
+  - php artisan key:generate
 
 script:
   - ./vendor/bin/phpunit
